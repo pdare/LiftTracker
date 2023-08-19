@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="LiftTracker.View.LiftSet"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LiftTracker.View"
+             x:Name="root"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="400" Background="#f5dd9d" Margin="0,5,0,5">
+    <Grid>
+        <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Height="30" Stretch="Fill"></Image>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Reps:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="CurrentRepsTxtBx" Width="40" AcceptsReturn="False" 
+                     PreviewTextInput="CurrentRepsTxtBx_PreviewTextInput" 
+                     PreviewKeyDown="CurrentRepsTxtBx_PreviewKeyDown" 
+                     TextAlignment="Center"
+                     Height="20"
+                     Background="#f5dd9d" Margin="0,0,5,0"></TextBox>
+            <Label Content="Weight:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox x:Name="CurrentWeightTxtBx" Width="40" AcceptsReturn="False" 
+                     PreviewTextInput="CurrentWeightTxtBx_PreviewTextInput" 
+                     PreviewKeyDown="CurrentWeightTxtBx_PreviewKeyDown" 
+                     TextAlignment="Center"
+                     Height="20"
+                     Background="#f5dd9d" Margin="0,0,5,0"></TextBox>
+            <!--<Label x:Name="weight" Foreground="#383838" Content="{Binding LiftWeight, ElementName=root}" VerticalAlignment="Center"></Label>
+            <Label x:Name="Reps" Foreground="#383838" Content="{Binding LiftReps, ElementName=root}" VerticalAlignment="Center"/>-->
+            <Label Content="Last Workout" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Reps:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LastReps" Foreground="#383838" Content="{Binding LiftReps, ElementName=root}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <Label Content="Weight:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

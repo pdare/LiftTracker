@@ -1,0 +1,38 @@
+﻿<Window x:Class="LiftTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LiftTracker" xmlns:view="clr-namespace:LiftTracker.View"
+        mc:Ignorable="d"
+        Title="" Height="450" Width="800" Background="#4d6160">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="600"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <ComboBox x:Name="LiftsCBox" Height="30" VerticalAlignment="Top" Width="100" Background="#a3c68c">
+            </ComboBox>
+            <Button x:Name="AddLiftBtn" Grid.Column="0" Background="#a3c68c" Width="80" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="AddLiftBtn_Click">Add Lift</Button>
+        </StackPanel>
+        <Label x:Name="CurrentDateLbl" HorizontalAlignment="Center" Grid.Column="1" FontSize="20" ></Label>
+        <ScrollViewer Width="530" HorizontalAlignment="Right" Grid.Column="1" Margin="0,30,0,0">
+            <WrapPanel x:Name="ucPanel" Width="500" HorizontalAlignment="Right" Margin="0,5,5,0" Grid.Column="1"/>
+        </ScrollViewer>
+    </Grid>
+
+
+    <!--<StackPanel>
+        <Grid Width="500" HorizontalAlignment="Left" Margin="0,0,0,0" Height="350">
+            <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\bottomshadowtexture.png" VerticalAlignment="Bottom"/>
+            <TextBlock Background="#333333" Height="325"></TextBlock>
+            <TextBlock Background="#a3c68c" Width="499" Height="20" Margin="0,0,0,0" VerticalAlignment="Top"></TextBlock>
+            <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Margin="0,0,0,0" Height="21" Stretch="Fill" VerticalAlignment="Top"></Image>
+            <TextBlock x:Name="lift1" Foreground="#383838" Margin="5,0,0,0" FontWeight="Bold" FontSize="16" VerticalAlignment="Top">test text</TextBlock>
+            <Button Width="50" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0" Background="#444444" Foreground="#a3c68c">add set</Button>
+            <Label x:Name="SetTrackLbl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,20,0,20" Foreground="#a3c68c">test</Label>
+        </Grid>
+    </StackPanel>-->
+</Window>

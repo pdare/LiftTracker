@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="LiftTracker.View.LiftBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LiftTracker.View"
+             x:Name="root"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="500">
+    <StackPanel>
+        <Grid Width="500" HorizontalAlignment="Left" Margin="0,0,0,0" Height="350">
+            <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\bottomshadowtexture.png" VerticalAlignment="Bottom"/>
+            <TextBlock Background="#383838" Height="325"></TextBlock>
+            <TextBlock Background="#a3c68c" Width="499" Height="20" Margin="0,0,0,0" VerticalAlignment="Top"></TextBlock>
+            <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Margin="0,0,0,0" Height="21" Stretch="Fill" VerticalAlignment="Top"></Image>
+            <!--<TextBlock x:Name="liftNameTxtBlck" Foreground="#383838" Margin="5,0,0,0" FontWeight="Bold" FontSize="16" VerticalAlignment="Top" Text="{Binding LiftName, ElementName=root}"></TextBlock>-->
+            <TextBlock x:Name="liftNameTxtBlck" Foreground="#383838" Margin="5,0,0,0" FontWeight="Bold" FontSize="16" VerticalAlignment="Top" Text="{Binding Path=LiftNameVM}"></TextBlock>
+            <Button x:Name="AddSetBtn" Width="50" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0" Background="#444444" Foreground="#a3c68c" Click="AddSetBtn_Click">add set</Button>
+            <Label x:Name="SetTrackLbl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,20,0,20" Foreground="#a3c68c"></Label>
+
+            <StackPanel x:Name="ucStack" Margin="0,60,0,0" Width="400" HorizontalAlignment="Left"></StackPanel>
+            <!--<WrapPanel x:Name="ucPanel" Height="280" Margin="0,30,0,0"/>-->
+
+
+
+        </Grid>
+    </StackPanel>
+</UserControl>
