@@ -45,11 +45,12 @@ namespace LiftTracker
 
         private void AddLiftBtn_Click(object sender, RoutedEventArgs e)
         {
+            string tempLiftName = "";
+            if (LiftsCBox.SelectedValue != null ) { tempLiftName = LiftsCBox.SelectedValue.ToString(); }
+            else { tempLiftName = "No lift name found"; }
 
-            LiftBlock block = new LiftBlock();
-            if (LiftsCBox.SelectedValue != null ) { block.LiftName = LiftsCBox.SelectedValue.ToString(); }
-            else { block.LiftName = "No lift name found"; }
-            
+            LiftBlock block = new LiftBlock(tempLiftName);
+
             foreach (var lift in lifts)
             {
                 if (lift.name.Equals(block.LiftName))
@@ -62,7 +63,7 @@ namespace LiftTracker
 
             liftBlocks.Add(block);
             ucPanel.Children.Add(block);
-            block.UpdateSetLbl();
+            //block.UpdateSetLbl();
         }
     }
 }

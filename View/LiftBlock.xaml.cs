@@ -42,16 +42,6 @@ namespace LiftTracker.View
             set { SetValue(NumberOfSetsProperty, value); }
         }
 
-        /*
-        public string NumberOfSets
-        {
-            get { return (string)GetValue(NumberOfSetsProperty); }
-            set { SetValue(NumberOfSetsProperty, value); }
-        } 
-         
-         */
-
-
         public int NumberOfReps
         {
             get { return (int)GetValue(NumberOfRepsProperty);}
@@ -64,11 +54,11 @@ namespace LiftTracker.View
             set { SetValue(WeightProperty, value); }
         }
 
-        public LiftBlock()
+        public LiftBlock(string liftname)
         {
             
             var viewModel = new LiftBlockVM();
-            viewModel.LiftNameVM = "test";
+            viewModel.LiftNameVM = liftname;
             DataContext = viewModel;
             InitializeComponent();
             currentSets = String.Format("{0}/{1}", currentSetsNum, NumberOfSets);

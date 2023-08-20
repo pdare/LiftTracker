@@ -16,7 +16,7 @@
             <!--<TextBlock x:Name="liftNameTxtBlck" Foreground="#383838" Margin="5,0,0,0" FontWeight="Bold" FontSize="16" VerticalAlignment="Top" Text="{Binding LiftName, ElementName=root}"></TextBlock>-->
             <TextBlock x:Name="liftNameTxtBlck" Foreground="#383838" Margin="5,0,0,0" FontWeight="Bold" FontSize="16" VerticalAlignment="Top" Text="{Binding Path=LiftNameVM}"></TextBlock>
             <Button x:Name="AddSetBtn" Width="50" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0" Background="#444444" Foreground="#a3c68c" Click="AddSetBtn_Click">add set</Button>
-            <Label x:Name="SetTrackLbl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,20,0,20" Foreground="#a3c68c"></Label>
+            <Label x:Name="SetTrackLbl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,20,0,20" Foreground="#a3c68c" Content="{Binding Path=currentSets}"></Label>
 
             <StackPanel x:Name="ucStack" Margin="0,60,0,0" Width="400" HorizontalAlignment="Left"></StackPanel>
             <!--<WrapPanel x:Name="ucPanel" Height="280" Margin="0,30,0,0"/>-->

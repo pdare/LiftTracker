@@ -22,17 +22,4 @@
             <WrapPanel x:Name="ucPanel" Width="500" HorizontalAlignment="Right" Margin="0,5,5,0" Grid.Column="1"/>
         </ScrollViewer>
     </Grid>
-
-
-    <!--<StackPanel>
-        <Grid Width="500" HorizontalAlignment="Left" Margin="0,0,0,0" Height="350">
-            <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\bottomshadowtexture.png" VerticalAlignment="Bottom"/>
-            <TextBlock Background="#333333" Height="325"></TextBlock>
-            <TextBlock Background="#a3c68c" Width="499" Height="20" Margin="0,0,0,0" VerticalAlignment="Top"></TextBlock>
-            <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Margin="0,0,0,0" Height="21" Stretch="Fill" VerticalAlignment="Top"></Image>
-            <TextBlock x:Name="lift1" Foreground="#383838" Margin="5,0,0,0" FontWeight="Bold" FontSize="16" VerticalAlignment="Top">test text</TextBlock>
-            <Button Width="50" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0" Background="#444444" Foreground="#a3c68c">add set</Button>
-            <Label x:Name="SetTrackLbl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,20,0,20" Foreground="#a3c68c">test</Label>
-        </Grid>
-    </StackPanel>-->
 </Window>
