@@ -1,0 +1,14 @@
+[
+    {
+        "name": "pull day",
+        "lifts": ["Bent-Over Row", "Rack Pull", "Barbell Shoulder Shrug"]
+    },
+    {
+        "name": "push day",
+        "lifts": ["Barbell Curl", "Pushup", "Overhead Tricep Extension"]
+    },
+    {
+        "name": "leg day",
+        "lifts": ["Hip Thrust", "Reverse Lunge", "Barbell Squat"]
+    }
+]

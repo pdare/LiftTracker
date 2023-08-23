@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Bent-Over Row",
+        "muscle groups": ["lats", "traps", "rhomboids", "posterior delts"]
+    },
+    {
+        "name": "Rack Pull",
+        "muscle groups": ["erector spinae", "lats", "traps", "glutes", "hamstrings"]
+    },
+    {
+        "name": "Barbell Shoulder Shrug",
+        "muscle groups": ["traps", "levator scapulae"]
+    },
+    {
+        "name": "Barbell Curl",
+        "muscle groups": ["biceps", "brachialis", "brachioradialis"]
+    },
+    {
+        "name": "Pushup",
+        "muscle groups": ["pecs", "triceps", "anterior delts"]
+    },
+    {
+        "name": "Overhead Tricep Extension",
+        "muscle groups": ["triceps"]
+    },
+    {
+        "name": "Hip Thrust",
+        "muscle groups": ["glutes", "hamstrings"]
+    },
+    {
+        "name": "Reverse Lunge",
+        "muscle groups": ["glutes", "vastus lateralis", "vastus medialis", "adductor magnus", "rectus femoris", "quads"]
+    },
+    {
+        "name": "Barbell Squat",
+        "muscle groups": ["glutes", "quads", "adductors"]
+    }
+]

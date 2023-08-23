@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiftTracker.View;
+using LiftTracker.Model;
 
 namespace LiftTracker
 {
@@ -26,13 +27,22 @@ namespace LiftTracker
 
         List<Lift> lifts;
         List<LiftBlock> liftBlocks = new List<LiftBlock>();
+        List<WorkoutTemplate> workoutTemplates;
         
         public MainWindow()
         {
+            DateTime currentDate = DateTime.Now;
+            
+
             InitializeComponent();
+            CurrentDateLbl.Content = currentDate;
+
+            //read lifts json and fill the lift selection combo box
+            string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\JSON\lifts.json");
+            string sFilePath = System.IO.Path.GetFullPath(sFile);
             
-            
-            var parseJson = new ReadJson("C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\test\\testjson.json");
+            var parseJson = new ReadJson(sFilePath);
             lifts = parseJson.UseUserDefinedJsonObj();
 
             foreach (var lift in lifts)
@@ -41,6 +51,21 @@ namespace LiftTracker
             }
 
             LiftsCBox.SelectedIndex = 0;
+
+            //read workout template json and fill the workout selection combo box
+            sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\JSON\workout_templates.json");
+            sFilePath = System.IO.Path.GetFullPath(sFile);
+
+            parseJson = new ReadJson(sFilePath);
+            workoutTemplates = parseJson.UseWorkoutTemplateJsonObj();
+
+            foreach (var workout in workoutTemplates)
+            {
+                WorkoutTemplatesCBox.Items.Add(workout.name);
+            }
+
+            WorkoutTemplatesCBox.SelectedIndex = 0;
         }
 
         private void AddLiftBtn_Click(object sender, RoutedEventArgs e)

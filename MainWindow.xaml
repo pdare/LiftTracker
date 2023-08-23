@@ -5,19 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LiftTracker" xmlns:view="clr-namespace:LiftTracker.View"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800" Background="#4d6160">
+        Title="" Height="800" Width="1000" Background="#292522">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="600"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <ComboBox x:Name="LiftsCBox" Height="30" VerticalAlignment="Top" Width="100" Background="#a3c68c">
-            </ComboBox>
-            <Button x:Name="AddLiftBtn" Grid.Column="0" Background="#a3c68c" Width="80" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="AddLiftBtn_Click">Add Lift</Button>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox x:Name="LiftsCBox" Height="30" VerticalAlignment="Top" Width="200" Background="#a3c68c" Margin="10,10,0,0">
+                </ComboBox>
+                <Button x:Name="AddLiftBtn" Grid.Column="0" Background="#a3c68c" Width="80" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="AddLiftBtn_Click" Margin="0,10,0,0">Add Lift</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox x:Name="WorkoutTemplatesCBox" Height="30" VerticalAlignment="Top" Width="200" Background="#a3c68c" Margin="10,10,0,0"></ComboBox>
+                <Button x:Name="UseTemplateBtn" Grid.Column="0" Background="#a3c68c" Width="80" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="AddLiftBtn_Click" Margin="0,10,0,0">Use Template</Button>
+            </StackPanel>
         </StackPanel>
-        <Label x:Name="CurrentDateLbl" HorizontalAlignment="Center" Grid.Column="1" FontSize="20" ></Label>
+        <Label x:Name="CurrentDateLbl" HorizontalAlignment="Center" Grid.Column="1" FontSize="20" Foreground="#a3c68c"></Label>
         <ScrollViewer Width="530" HorizontalAlignment="Right" Grid.Column="1" Margin="0,30,0,0">
             <WrapPanel x:Name="ucPanel" Width="500" HorizontalAlignment="Right" Margin="0,5,5,0" Grid.Column="1"/>
         </ScrollViewer>

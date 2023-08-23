@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiftTracker.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,15 @@ namespace LiftTracker.test
             List<Lift> lifts = JsonSerializer.Deserialize<List<Lift>>(json);
             //var lift = JsonSerializer.Deserialize<Lift>(json);
             return lifts;
+        }
+
+        public List<WorkoutTemplate> UseWorkoutTemplateJsonObj()
+        {
+            //using StreamReader reader = new(_sampleJsonFilePath);
+            var json = File.ReadAllText(_sampleJsonFilePath);
+            List<WorkoutTemplate> workoutTemplates = JsonSerializer.Deserialize<List<WorkoutTemplate>>(json);
+            //var lift = JsonSerializer.Deserialize<Lift>(json);
+            return workoutTemplates;
         }
     }
 }

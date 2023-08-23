@@ -1,0 +1,28 @@
+[{
+    "date": "08-08-2023",
+    "workout": "pull",
+    "exercises":
+    {
+        "exercise 1":
+        {
+            "name": "Bent-Over Rows",
+            "sets": 5,
+            "reps": 10,
+            "weight": 100
+        },
+        "exercise 2":
+        {
+            "name": "Rack Pull",
+            "sets": 3,
+            "reps": 5,
+            "weight": 300
+        },
+        "exercise 3":
+        {
+            "name": "Barbell Shoulder Shrug",
+            "sets": 5,
+            "reps": 5,
+            "weight": 200
+        }
+    }
+}]
