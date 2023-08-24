@@ -90,5 +90,42 @@ namespace LiftTracker
             ucPanel.Children.Add(block);
             //block.UpdateSetLbl();
         }
+
+        private void UseTemplateBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            ucPanel.Children.Clear();
+            
+            string tempWorkoutName = "";
+            if (WorkoutTemplatesCBox.SelectedValue != null ) { tempWorkoutName = WorkoutTemplatesCBox.SelectedValue.ToString(); }
+            else { tempWorkoutName = "No workout found"; }
+            
+            foreach (var workout in workoutTemplates)
+            {
+                if (workout.name == tempWorkoutName)
+                {
+                    
+                    foreach (var lift in workout.lifts)
+                    {
+                        LiftBlock block = new LiftBlock(lift);
+
+                        foreach (var lft in lifts)
+                        {
+                            if (lft.name.Equals(block.LiftName))
+                            {
+                                block.NumberOfSets = lft.sets;
+                                block.NumberOfReps = lft.reps;
+                                block.Weight = lft.weight;
+                                break;
+                            }
+                        }
+
+                        liftBlocks.Add(block);
+                        ucPanel.Children.Add(block);
+                    }
+                    break;
+                }
+            }
+        }
     }
 }
