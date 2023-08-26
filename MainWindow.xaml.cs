@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiftTracker.View;
 using LiftTracker.Model;
+using System.Text.Json;
 
 namespace LiftTracker
 {
@@ -25,7 +26,7 @@ namespace LiftTracker
     public partial class MainWindow : Window
     {
 
-        List<Lift> lifts;
+        List<LiftTemplate> lifts;
         List<LiftBlock> liftBlocks = new List<LiftBlock>();
         List<WorkoutTemplate> workoutTemplates;
         
@@ -35,7 +36,7 @@ namespace LiftTracker
             
 
             InitializeComponent();
-            CurrentDateLbl.Content = currentDate;
+            CurrentDateLbl.Content = currentDate.ToString("MM-dd-yyyy");
 
             //read lifts json and fill the lift selection combo box
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -99,7 +100,7 @@ namespace LiftTracker
             string tempWorkoutName = "";
             if (WorkoutTemplatesCBox.SelectedValue != null ) { tempWorkoutName = WorkoutTemplatesCBox.SelectedValue.ToString(); }
             else { tempWorkoutName = "No workout found"; }
-            
+            CurrentWorkoutTB.Text = tempWorkoutName;
             foreach (var workout in workoutTemplates)
             {
                 if (workout.name == tempWorkoutName)
@@ -126,6 +127,39 @@ namespace LiftTracker
                     break;
                 }
             }
+        }
+
+        private void SaveWorkoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Dictionary<string, object> workoutDic = new Dictionary<string, object>();
+            workoutDic.Add("date", CurrentDateLbl.Content.ToString());
+            workoutDic.Add("workout", CurrentWorkoutTB.Text.ToString());
+            Dictionary<string, object> exercisesDic = new Dictionary<string, object>();
+
+            List<Dictionary<string, int>> dicListReps = new List<Dictionary<string, int>>();
+            List<Dictionary<string, float>> dicListWeight = new List<Dictionary<string, float>>();
+
+            int iter = 1;
+            foreach (var lifts in liftBlocks) 
+            {
+                Dictionary<string, int> repsDic = new Dictionary<string, int>();
+                Dictionary<string, float> weightDic = new Dictionary<string, float>();
+                for (int i = 0; i < lifts.liftSets.Count; i++)
+                {
+                    repsDic.Add(String.Format("set {0}", i+1), int.Parse(lifts.liftSets[i].CurrentRepsTxtBx.Text.ToString()));
+                    weightDic.Add(String.Format("set {0}", i+1), float.Parse(lifts.liftSets[i].CurrentWeightTxtBx.Text.ToString()));
+                }
+                exercisesDic.Add("name", lifts.liftNameTxtBlck.Text.ToString());
+                exercisesDic.Add("number of sets", lifts.currentSetsNum);
+                exercisesDic.Add("reps", repsDic.ToDictionary(entry => entry.Key, entry => entry.Value));
+                exercisesDic.Add("weight", weightDic.ToDictionary(entry => entry.Key, entry => entry.Value));
+                workoutDic.Add(String.Format("exercise {0}", iter), exercisesDic.ToDictionary(entry => entry.Key, entry => entry.Value));
+                exercisesDic.Clear();
+                iter++;
+            }
+            string data = JsonSerializer.Serialize(workoutDic);
+            string filename = String.Format("Workout {0}", DateTime.Now.ToString("HH mm MM-dd-yyyy"));
+            File.WriteAllText(filename, data);
         }
     }
 }

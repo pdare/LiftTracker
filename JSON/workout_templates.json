@@ -5,7 +5,7 @@
     },
     {
         "name": "push day",
-        "lifts": ["Barbell Curl", "Pushup", "Overhead Tricep Extension"]
+        "lifts": ["Barbell Curl", "Overhead Tricep Extension", "Pushup"]
     },
     {
         "name": "leg day",

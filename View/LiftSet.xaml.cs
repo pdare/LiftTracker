@@ -22,12 +22,12 @@ namespace LiftTracker.View
     /// </summary>
     public partial class LiftSet : UserControl
     {
-        public static readonly DependencyProperty LiftWeightProperty = DependencyProperty.Register("LiftWeight", typeof(int), typeof(LiftSet), new PropertyMetadata(0));
+        public static readonly DependencyProperty LiftWeightProperty = DependencyProperty.Register("LiftWeight", typeof(float), typeof(LiftSet), new PropertyMetadata(0.0f));
         public static readonly DependencyProperty LiftRepProperty = DependencyProperty.Register("LiftReps", typeof(int), typeof(LiftSet), new PropertyMetadata(0));
 
-        public int LiftWeight
+        public float LiftWeight
         {
-            get { return (int)GetValue(LiftWeightProperty); }
+            get { return (float)GetValue(LiftWeightProperty); }
             set { SetValue(LiftWeightProperty, value);}
         }
 
@@ -68,13 +68,13 @@ namespace LiftTracker.View
 
         private void CurrentWeightTxtBx_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex reg = new Regex("[^0-9]+");
+            Regex reg = new Regex("[^0-9..]+");
             e.Handled = reg.IsMatch(e.Text);
         }
 
         private void CurrentWeightTxtBx_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.Back)
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.Back || e.Key == Key.OemPeriod || e.Key == Key.Decimal)
             {
                 e.Handled = false;
             }

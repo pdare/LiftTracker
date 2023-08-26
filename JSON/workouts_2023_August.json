@@ -1,28 +1,48 @@
 [{
     "date": "08-08-2023",
     "workout": "pull",
-    "exercises":
+    "exercise 1":
     {
-        "exercise 1":
+        "name": "Bent-Over Rows",
+        "number of sets": 5,
+        "reps per set same": true,
+        "weight per set same": true,
+        "reps": 10,
+        "weight": 100
+    },
+    "exercise 2":
+    {
+        "name": "Rack Pull",
+        "number of sets": 3,
+        "reps": 
         {
-            "name": "Bent-Over Rows",
-            "sets": 5,
-            "reps": 10,
-            "weight": 100
+            "set 1": 5,
+            "set 2": 5,
+            "set 3": 4,
+            "set 4": 3,
+            "set 5": 2
         },
-        "exercise 2":
+        "weight": 300
+    },
+    "exercise 3":
+    {
+        "name": "Barbell Shoulder Shrug",
+        "number of sets": 5,
+        "reps": 
         {
-            "name": "Rack Pull",
-            "sets": 3,
-            "reps": 5,
-            "weight": 300
+            "set 1": 5,
+            "set 2": 5,
+            "set 3": 4,
+            "set 4": 4,
+            "set 5": 2
         },
-        "exercise 3":
+        "weight":
         {
-            "name": "Barbell Shoulder Shrug",
-            "sets": 5,
-            "reps": 5,
-            "weight": 200
+            "set 1": 200,
+            "set 2": 200,
+            "set 3": 210,
+            "set 4": 215,
+            "set 5": 230
         }
     }
 }]

@@ -25,10 +25,10 @@ namespace LiftTracker.View
         //public static readonly DependencyProperty NumberOfSetsProperty = DependencyProperty.Register("NumberOfSets", typeof(string), typeof (LiftBlock), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty NumberOfSetsProperty = DependencyProperty.Register("NumberOfSets", typeof(int), typeof(LiftBlock), new PropertyMetadata(0));
         public static readonly DependencyProperty NumberOfRepsProperty = DependencyProperty.Register("NumberOfReps", typeof(int), typeof(LiftBlock), new PropertyMetadata(0));
-        public static readonly DependencyProperty WeightProperty = DependencyProperty.Register("Weight", typeof(int), typeof(LiftBlock), new PropertyMetadata(0));
-        int currentSetsNum = 0;
+        public static readonly DependencyProperty WeightProperty = DependencyProperty.Register("Weight", typeof(float), typeof(LiftBlock), new PropertyMetadata(0.0f));
+        public int currentSetsNum = 0;
         string currentSets = "";
-        List<LiftSet> liftSets = new List<LiftSet>();
+        public List<LiftSet> liftSets = new List<LiftSet>();
 
         public string LiftName
         {
@@ -48,9 +48,9 @@ namespace LiftTracker.View
             set { SetValue(NumberOfRepsProperty, value);}
         }
 
-        public int Weight
+        public float Weight
         {
-            get { return (int)GetValue(WeightProperty); }
+            get { return (float)GetValue(WeightProperty); }
             set { SetValue(WeightProperty, value); }
         }
 
