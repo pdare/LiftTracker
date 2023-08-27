@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -82,6 +83,11 @@ namespace LiftTracker.View
             liftSets.Add(Set);
             ucStack.Children.Add(Set);
             Set.UpdateCurrentTxtBx();
+        }
+
+        private void RemoveLiftBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ((Panel)this.Parent).Children.Remove(this);
         }
     }
 }

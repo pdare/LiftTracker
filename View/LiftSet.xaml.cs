@@ -81,5 +81,10 @@ namespace LiftTracker.View
             else
             { e.Handled = true; }
         }
+
+        private void RemoveSetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ((Panel)this.Parent).Children.Remove(this);
+        }
     }
 }

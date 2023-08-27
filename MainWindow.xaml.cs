@@ -161,5 +161,10 @@ namespace LiftTracker
             string filename = String.Format("Workout {0}", DateTime.Now.ToString("HH mm MM-dd-yyyy"));
             File.WriteAllText(filename, data);
         }
+
+        private void RemoveLiftBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

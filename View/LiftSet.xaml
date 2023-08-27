@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LiftTracker.View"
              x:Name="root"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="400" Background="#f5dd9d" Margin="0,5,0,5">
+             d:DesignHeight="30" d:DesignWidth="420" Background="#f5dd9d" Margin="0,5,0,5">
     <Grid>
         <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Height="30" Stretch="Fill"></Image>
         <StackPanel Orientation="Horizontal">
@@ -30,6 +30,7 @@
             <Label Content="Reps:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label x:Name="LastReps" Foreground="#383838" Content="{Binding LiftReps, ElementName=root}" VerticalAlignment="Center" Margin="0,0,5,0"/>
             <Label Content="Weight:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="RemoveSetBtn" Width="30" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Transparent" Margin="28,0,0,0" Foreground="#f5dd9d" Click="RemoveSetBtn_Click">x</Button>
             
         </StackPanel>
     </Grid>
