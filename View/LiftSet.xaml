@@ -6,10 +6,15 @@
              xmlns:local="clr-namespace:LiftTracker.View"
              x:Name="root"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="420" Background="#f5dd9d" Margin="0,5,0,5">
+             d:DesignHeight="60" d:DesignWidth="420" Background="Transparent" Margin="0,5,0,5">
     <Grid>
-        <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Height="30" Stretch="Fill"></Image>
-        <StackPanel Orientation="Horizontal">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Background="#f5dd9d" Grid.Row="0" Width="400" Margin="0,0,20,0"/>
+        <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Height="30" Stretch="Fill" Grid.Row="0" Width="400" Margin="0,0,20,0"></Image>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,0">
             <Label Content="Reps:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="CurrentRepsTxtBx" Width="40" AcceptsReturn="False" 
                      PreviewTextInput="CurrentRepsTxtBx_PreviewTextInput" 
@@ -26,12 +31,16 @@
                      Background="#f5dd9d" Margin="0,0,5,0"></TextBox>
             <!--<Label x:Name="weight" Foreground="#383838" Content="{Binding LiftWeight, ElementName=root}" VerticalAlignment="Center"></Label>
             <Label x:Name="Reps" Foreground="#383838" Content="{Binding LiftReps, ElementName=root}" VerticalAlignment="Center"/>-->
+
+            <Button x:Name="RemoveSetBtn" Width="30" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Transparent" Margin="190,0,0,0" Foreground="#f5dd9d" Click="RemoveSetBtn_Click">x</Button>
+        </StackPanel>
+        <TextBlock Background="#f5dd9d" Grid.Row="1" Width="400" Margin="20,2,0,0"/>
+        <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Height="30" Stretch="Fill" Grid.Row="1" Width="400" Margin="20,0,0,0"></Image>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0">
             <Label Content="Last Workout" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="Reps:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label x:Name="LastReps" Foreground="#383838" Content="{Binding LiftReps, ElementName=root}" VerticalAlignment="Center" Margin="0,0,5,0"/>
             <Label Content="Weight:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button x:Name="RemoveSetBtn" Width="30" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Transparent" Margin="28,0,0,0" Foreground="#f5dd9d" Click="RemoveSetBtn_Click">x</Button>
-            
         </StackPanel>
     </Grid>
 </UserControl>
