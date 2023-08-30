@@ -1,6 +1,7 @@
 ﻿using LiftTracker.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,9 @@ namespace LiftTracker.View
         public int currentSetsNum = 0;
         string currentSets = "";
         public List<LiftSet> liftSets = new List<LiftSet>();
+        private double bgHeight = 0.0d;
+        private double baseHeight = 120.0d;
+        private double heightMod = 65.0d;
 
         public string LiftName
         {
@@ -61,7 +65,9 @@ namespace LiftTracker.View
             var viewModel = new LiftBlockVM();
             viewModel.LiftNameVM = liftname;
             DataContext = viewModel;
+            
             InitializeComponent();
+            bgHeight = grid.Height - 25;
             currentSets = String.Format("{0}/{1}", currentSetsNum, NumberOfSets);
             SetTrackLbl.Content = currentSets;
         }
@@ -74,6 +80,7 @@ namespace LiftTracker.View
 
         private void AddSetBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             currentSetsNum++;
             currentSets = String.Format("{0}/{1}", currentSetsNum, NumberOfSets);
             SetTrackLbl.Content = currentSets;
@@ -82,12 +89,23 @@ namespace LiftTracker.View
             Set.LiftWeight = Weight;
             liftSets.Add(Set);
             ucStack.Children.Add(Set);
+            this.Height = baseHeight + (heightMod * liftSets.Count);
+            grid.Height = baseHeight + (heightMod * liftSets.Count);
+            bgTxtBlck.Height = (baseHeight - 25) + (heightMod * liftSets.Count);
             Set.UpdateCurrentTxtBx();
         }
 
+        
         private void RemoveLiftBtn_Click(object sender, RoutedEventArgs e)
         {
             ((Panel)this.Parent).Children.Remove(this);
         }
+
+        public void updateHeight()
+        {
+            this.Height = baseHeight - (heightMod * liftSets.Count);
+            grid.Height = baseHeight - (heightMod * liftSets.Count);
+        }
+        
     }
 }

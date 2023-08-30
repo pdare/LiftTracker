@@ -32,7 +32,7 @@
             <!--<Label x:Name="weight" Foreground="#383838" Content="{Binding LiftWeight, ElementName=root}" VerticalAlignment="Center"></Label>
             <Label x:Name="Reps" Foreground="#383838" Content="{Binding LiftReps, ElementName=root}" VerticalAlignment="Center"/>-->
 
-            <Button x:Name="RemoveSetBtn" Width="30" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Transparent" Margin="190,0,0,0" Foreground="#f5dd9d" Click="RemoveSetBtn_Click">x</Button>
+            <Button x:Name="RemoveSetBtn" Width="30" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Transparent" Margin="185,0,0,0" Foreground="#f5dd9d" Click="RemoveSetBtn_Click">x</Button>
         </StackPanel>
         <TextBlock Background="#f5dd9d" Grid.Row="1" Width="400" Margin="20,2,0,0"/>
         <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Height="30" Stretch="Fill" Grid.Row="1" Width="400" Margin="20,0,0,0"></Image>

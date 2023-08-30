@@ -157,7 +157,7 @@ namespace LiftTracker
                 exercisesDic.Clear();
                 iter++;
             }
-            string data = JsonSerializer.Serialize(workoutDic);
+            string data = JsonSerializer.Serialize(workoutDic, new JsonSerializerOptions() { WriteIndented = true });
             string filename = String.Format("Workout {0}", DateTime.Now.ToString("HH mm MM-dd-yyyy"));
             File.WriteAllText(filename, data);
         }

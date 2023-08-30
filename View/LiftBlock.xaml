@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:LiftTracker.View"
              x:Name="root"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="500">
+             d:DesignHeight="120" d:DesignWidth="500">
     <StackPanel>
-        <Grid Width="500" HorizontalAlignment="Left" Margin="0,0,0,0" Height="350">
+        <Grid x:Name="grid" Width="500" HorizontalAlignment="Left" Margin="0,0,0,0" Height="120">
             <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\bottomshadowtexture.png" VerticalAlignment="Bottom"/>
-            <TextBlock Background="#383838" Height="325"></TextBlock>
+            <TextBlock x:Name="bgTxtBlck" Background="#383838" Height="95"></TextBlock>
             <TextBlock Background="#a3c68c" Width="499" Height="20" Margin="0,0,0,0" VerticalAlignment="Top"></TextBlock>
             <Image Source="C:\\Users\\insai\\OneDrive\\Documents\\Programming\\LiftTracker\\UI Elements\\titlebartexture.png" Margin="0,0,0,0" Height="21" Stretch="Fill" VerticalAlignment="Top"></Image>
             <!--<TextBlock x:Name="liftNameTxtBlck" Foreground="#383838" Margin="5,0,0,0" FontWeight="Bold" FontSize="16" VerticalAlignment="Top" Text="{Binding LiftName, ElementName=root}"></TextBlock>-->
@@ -21,9 +21,6 @@
 
             <StackPanel x:Name="ucStack" Margin="0,60,0,0" Width="420" HorizontalAlignment="Left"></StackPanel>
             <!--<WrapPanel x:Name="ucPanel" Height="280" Margin="0,30,0,0"/>-->
-
-
-
         </Grid>
     </StackPanel>
 </UserControl>

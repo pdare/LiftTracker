@@ -84,6 +84,7 @@ namespace LiftTracker.View
 
         private void RemoveSetBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             ((Panel)this.Parent).Children.Remove(this);
         }
     }
