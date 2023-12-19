@@ -9,6 +9,6 @@
     },
     {
         "name": "leg day",
-        "lifts": ["Hip Thrust", "Reverse Lunge", "Barbell Squat"]
+        "lifts": ["Hip Thrust", "Barbell Squat"]
     }
 ]
