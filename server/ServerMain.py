@@ -1,6 +1,9 @@
 import threading
 import socket
 import json
+from DBApi import DatabaseManager
+import os
+from config.definitions import ROOT_DIR
 
 server_run = True
 server_listening = False
@@ -33,13 +36,19 @@ def server_program():
     conn, address = server_socket.accept()
     print("connection from: " + str(address))
 
+    file_path = os.path.join(ROOT_DIR, "..\\passwords\\userpass.txt")
+    pass_file = open(file_path, 'r')
+    lines = pass_file.readlines()
+    pass_file.close()
+    db_accessor = DatabaseManager(lines[0].strip(), lines[1].strip())
+
     while True:
         data = conn.recv(1024).decode()
         if not data:
             break
         #print("from connected user: " + str(data))
         if str(data) == "get lifts":
-            data = send_lifts()
+            data = db_accessor.get_lift()#DatabaseManager.get_lift(lines[0].strip(), lines[1].strip())
         elif str(data) == "sent lifts":
             print('workout recieved')
         else:
