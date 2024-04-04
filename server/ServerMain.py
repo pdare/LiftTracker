@@ -36,33 +36,38 @@ def server_program():
     conn, address = server_socket.accept()
     print("connection from: " + str(address))
 
+    
+
+    while True:
+        data = conn.recv(1024).decode()
+        parsed_data = data.split('||')
+        if not data:
+            break
+        #print("from connected user: " + str(data))
+        if parsed_data[0] == "get lifts":
+            data = send_lifts(parsed_data[1], parsed_data[2], parsed_data[3])
+        elif parsed_data[0] == "sent lifts":
+            receive_lifts(parsed_data[1], parsed_data[2])
+        else:
+            print("something failed")
+        conn.send(data.encode())
+    conn.close()
+
+def send_lifts(user_id, date, set_num):
     file_path = os.path.join(ROOT_DIR, "..\\passwords\\userpass.txt")
     pass_file = open(file_path, 'r')
     lines = pass_file.readlines()
     pass_file.close()
     db_accessor = DatabaseManager(lines[0].strip(), lines[1].strip())
+    return db_accessor.get_lift(user_id, date, set_num)
 
-    while True:
-        data = conn.recv(1024).decode()
-        parsed_data = data.split(':')
-        if not data:
-            break
-        #print("from connected user: " + str(data))
-        if parsed_data[0] == "get lifts":
-            data = db_accessor.get_lift(parsed_data[1], parsed_data[2], parsed_data[3])#DatabaseManager.get_lift(lines[0].strip(), lines[1].strip())
-        elif str(data) == "sent lifts":
-            print('workout recieved')
-        else:
-            print(data)
-        print(type(data))
-        conn.send(data.encode())
-    conn.close()
-
-def send_lifts():
-    return "deadlift 265 3x5"
-
-def receive_lifts():
-    pass
+def receive_lifts(user_id, json_data):
+    file_path = os.path.join(ROOT_DIR, "..\\passwords\\userpass.txt")
+    pass_file = open(file_path, 'r')
+    lines = pass_file.readlines()
+    pass_file.close()
+    db_accessor = DatabaseManager(lines[0].strip(), lines[1].strip())
+    db_accessor.save_workout(json_data, user_id)
 
 if __name__ == "__main__":
     #global server_listening
