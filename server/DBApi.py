@@ -6,7 +6,18 @@ class DatabaseManager:
         self.username = username
         self.password = password
 
-    def get_lift(self):
+    def tuple_to_string(self, tuple):
+        output = ""
+        for item in tuple:
+            output += str(item)
+        return self.format_output_string(output)
+    
+    def format_output_string(self, output_str):
+        result = output_str.strip('()')
+        print(result)
+        return result
+
+    def get_lift(self, user_id, date, set_num):
         conn = pymysql.connect(
             host = 'localhost',
             user = self.username,
@@ -15,11 +26,12 @@ class DatabaseManager:
         )
         name = 19752
         cur = conn.cursor()
-        cur.execute("SELECT user_name FROM Users WHERE user_id = {}".format(name))
+        select_query = "SELECT * FROM workout_lifts WHERE user_id = {0} AND lift_date = '{1}' AND set_num = {2}".format(int(user_id), date, int(set_num))
+        cur.execute(select_query)
         output = cur.fetchall()
-        print(output)
         conn.close()
-        return str(output[0])
+        output_as_str = self.tuple_to_string(output)
+        return str(output)
 
     def send_workout():
         pass

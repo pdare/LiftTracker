@@ -44,15 +44,17 @@ def server_program():
 
     while True:
         data = conn.recv(1024).decode()
+        parsed_data = data.split(':')
         if not data:
             break
         #print("from connected user: " + str(data))
-        if str(data) == "get lifts":
-            data = db_accessor.get_lift()#DatabaseManager.get_lift(lines[0].strip(), lines[1].strip())
+        if parsed_data[0] == "get lifts":
+            data = db_accessor.get_lift(parsed_data[1], parsed_data[2], parsed_data[3])#DatabaseManager.get_lift(lines[0].strip(), lines[1].strip())
         elif str(data) == "sent lifts":
             print('workout recieved')
         else:
             print(data)
+        print(type(data))
         conn.send(data.encode())
     conn.close()
 

@@ -18,6 +18,7 @@ using LiftTracker.View;
 using LiftTracker.Model;
 using System.Text.Json;
 
+
 namespace LiftTracker
 {
     /// <summary>
@@ -33,6 +34,7 @@ namespace LiftTracker
         public MainWindow()
         {
             DateTime currentDate = DateTime.Now;
+
             
 
             InitializeComponent();
