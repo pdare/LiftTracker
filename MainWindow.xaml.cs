@@ -177,6 +177,25 @@ namespace LiftTracker
 
         }
 
+        private void GetWorkoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Runtime.PythonDLL = @"C:\Python310\python312.dll";
+            PythonEngine.Initialize();
+            int user_id = 19752;
+            string date = "2024-05-04";
+            int set_num = 1;
+            string lift_name = "Rack Pull";
+            string temp = "";
+            using (Py.GIL())
+            {
+                var getLiftScript = Py.Import("ClientMain");
+                var script_result = getLiftScript.InvokeMethod("get_lift", new PyObject[] {user_id.ToPython(), date.ToPython(), set_num.ToPython(), lift_name.ToPython()});
+                temp = script_result.ToString();
+            }
+            PythonEngine.Shutdown();
+            TestLabel.Content = temp;
+        }
+
         private void RemoveLiftBtn_Click(object sender, RoutedEventArgs e)
         {
 

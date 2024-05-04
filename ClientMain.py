@@ -39,21 +39,15 @@ def format_output_string(format_type, output_str):
             removed_date = re.findall(no_date_regex, stripped_output_str)
             removed_date_str = removed_date[0].replace("'", "")
             split_params = removed_date_str.split(',')
-            result.update({"workout_name": split_params[0].strip()})
-            result.update({"lift_name": split_params[1].strip()})
-            result.update({"reps_num": int(split_params[2].strip())})
-            result.update({"weight": int(split_params[3].strip())})
-            result.update({"set_num": int(split_params[4].strip())})
-            result.update({"user_id": int(split_params[5].strip())})
+            result.update({"workout_name": split_params[0]})
+            result.update({"lift_name": split_params[1]})
+            result.update({"reps_num": split_params[2]})
+            result.update({"weight": split_params[3]})
+            result.update({"set_num": split_params[4]})
+            result.update({"user_id": split_params[5]})
     return result
 
 def send_lifts(user_id, c_json_data):
-    #filepath = os.path.join(os.getcwd(), "Workout 06 01 03-28-2024")
-    #filepath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'JSON'))
-    #f = open(filepath)
-    #json_data = json.load(f)
-    #print(type(json_data))
-    #json_bytes = json.dumps(json_data).encode('utf-8')
     json_bytes = json.dumps(c_json_data).encode('utf-8')
 
     host = "127.0.0.1"
@@ -74,14 +68,14 @@ def send_lifts(user_id, c_json_data):
 
     client_socket.close()
 
-def get_lift(user_id, date, set_num):
+def get_lift(user_id, date, set_num, lift_name):
     host = "127.0.0.1"
     port = 5000
 
     client_socket = socket.socket()
     client_socket.connect((host, port))
 
-    message = "GetLifts" + "||" + str(user_id) + "||" + date + "||" + str(set_num)
+    message = "GetLifts" + "||" + str(user_id) + "||" + date + "||" + str(set_num) + "||" + str(lift_name)
     data_from_server = ""
 
     while message.lower().strip() != "bye":
@@ -93,8 +87,12 @@ def get_lift(user_id, date, set_num):
         message = "bye"
 
     client_socket.close()
-    lift_as_dict = format_output_string(FormatType.GETLIFT, data_from_server)
-    print(lift_as_dict)
+    #lift_as_dict = format_output_string(FormatType.GETLIFT, data_from_server)
+    #print(lift_as_dict)
+    return data_from_server
+
+def test_get():
+    return "got this from client"
 
 if __name__ == "__main__":
     client_program()

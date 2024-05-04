@@ -15,10 +15,10 @@ class DatabaseManager:
     
     def format_output_string(self, output_str):
         result = output_str.strip('()')
-        print(result)
+        #print(result)
         return result
 
-    def get_lift(self, user_id, date, set_num):
+    def get_lift(self, user_id, date, set_num, lift_name):
         conn = pymysql.connect(
             host = 'localhost',
             user = self.username,
@@ -27,11 +27,12 @@ class DatabaseManager:
         )
         name = 19752
         cur = conn.cursor()
-        select_query = "SELECT * FROM workout_lifts WHERE user_id = {0} AND lift_date = '{1}' AND set_num = {2}".format(int(user_id), date, int(set_num))
+        select_query = "SELECT * FROM workout_lifts WHERE user_id = {0} AND lift_date = '{1}' AND set_num = {2} AND lift_name = '{3}'".format(int(user_id), date, int(set_num), lift_name)
         cur.execute(select_query)
         output = cur.fetchall()
         conn.close()
         output_as_str = self.tuple_to_string(output)
+        print(output)
         return str(output)
 
     def send_workout():
