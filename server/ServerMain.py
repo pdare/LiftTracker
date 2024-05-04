@@ -4,6 +4,7 @@ import json
 from DBApi import DatabaseManager
 import os
 from config.definitions import ROOT_DIR
+import re
 
 server_run = True
 server_listening = False
@@ -44,12 +45,22 @@ def server_program():
         if not data:
             break
         #print("from connected user: " + str(data))
-        if parsed_data[0] == "get lifts":
-            data = send_lifts(parsed_data[1], parsed_data[2], parsed_data[3])
-        elif parsed_data[0] == "sent lifts":
-            receive_lifts(parsed_data[1], parsed_data[2])
-        else:
-            print("something failed")
+        match parsed_data[0]:
+            case "GetLifts":
+                data = send_lifts(parsed_data[1], parsed_data[2], parsed_data[3])
+            case "SentLifts":
+                json_str = str(parsed_data[2]).replace('\\', '').replace("b'", '')
+                json_str = json_str[1:-2]
+                json_dict = json.loads(json_str)
+                receive_lifts(parsed_data[1], json_dict)
+            case _:
+                print('something failed')
+        #if parsed_data[0] == "get lifts":
+            #data = send_lifts(parsed_data[1], parsed_data[2], parsed_data[3])
+        #elif parsed_data[0] == "sent lifts":
+            #receive_lifts(parsed_data[1], parsed_data[2])
+        #else:
+            #print("something failed")
         conn.send(data.encode())
     conn.close()
 

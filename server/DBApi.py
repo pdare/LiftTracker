@@ -39,8 +39,8 @@ class DatabaseManager:
 
     def save_workout(self, json_data, user_id):
         print("printing json input from API")
-        formatted_str_data = json_data.replace("'", '"')
-        json_dict = json.loads(formatted_str_data)
+        #formatted_str_data = json_data.replace("'", '"')
+        json_dict = json_data
         #-- INSERT INTO workout_lifts values ("2024-03-23", "leg day", "barbell squat", 5, 135, 1, 19752)
         date = json_dict['date']
         date_split = date.split('-')

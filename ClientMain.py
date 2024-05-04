@@ -47,13 +47,14 @@ def format_output_string(format_type, output_str):
             result.update({"user_id": int(split_params[5].strip())})
     return result
 
-def send_lifts(user_id):
-    filepath = os.path.join(os.getcwd(), "Workout 06 01 03-28-2024")
+def send_lifts(user_id, c_json_data):
+    #filepath = os.path.join(os.getcwd(), "Workout 06 01 03-28-2024")
     #filepath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'JSON'))
-    f = open(filepath)
-    json_data = json.load(f)
-    print(type(json_data))
-    json_bytes = json.dumps(json_data).encode('utf-8')
+    #f = open(filepath)
+    #json_data = json.load(f)
+    #print(type(json_data))
+    #json_bytes = json.dumps(json_data).encode('utf-8')
+    json_bytes = json.dumps(c_json_data).encode('utf-8')
 
     host = "127.0.0.1"
     port = 5000
@@ -61,8 +62,7 @@ def send_lifts(user_id):
     client_socket = socket.socket()
     client_socket.connect((host, port))
 
-    message = "sent lifts" + "||" + str(user_id) + "||" + str(json_data)
-    f.close()
+    message = "SentLifts" + "||" + str(user_id) + "||" + str(json_bytes)
 
     while message != "bye":
         client_socket.send(message.encode())
@@ -81,7 +81,7 @@ def get_lift(user_id, date, set_num):
     client_socket = socket.socket()
     client_socket.connect((host, port))
 
-    message = "get lifts" + "||" + str(user_id) + "||" + date + "||" + str(set_num)
+    message = "GetLifts" + "||" + str(user_id) + "||" + date + "||" + str(set_num)
     data_from_server = ""
 
     while message.lower().strip() != "bye":

@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 using LiftTracker.View;
 using LiftTracker.Model;
 using System.Text.Json;
-
+using Python.Runtime;
 
 namespace LiftTracker
 {
@@ -160,8 +160,21 @@ namespace LiftTracker
                 iter++;
             }
             string data = JsonSerializer.Serialize(workoutDic, new JsonSerializerOptions() { WriteIndented = true });
+            string data_for_server = JsonSerializer.Serialize(workoutDic, new JsonSerializerOptions { WriteIndented = false });
             string filename = String.Format("Workout {0}", DateTime.Now.ToString("HH mm MM-dd-yyyy"));
             File.WriteAllText(filename, data);
+
+            Runtime.PythonDLL = @"C:\Python310\python312.dll";
+            PythonEngine.Initialize();
+            string data_to_send = "data from C#";
+            int user_id = 19752;
+            using (Py.GIL())
+            {
+                var getLiftScript = Py.Import("ClientMain");
+                var script_result = getLiftScript.InvokeMethod("send_lifts", new PyObject[] { user_id.ToPython(), data_for_server.ToPython() });
+            }
+            PythonEngine.Shutdown();
+
         }
 
         private void RemoveLiftBtn_Click(object sender, RoutedEventArgs e)

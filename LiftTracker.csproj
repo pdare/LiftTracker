@@ -15,4 +15,13 @@
     <PackageReference Include="pythonnet" Version="3.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ClientMain.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="client\print_stuff.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
