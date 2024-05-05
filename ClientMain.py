@@ -13,6 +13,8 @@ def client_program():
         get_lift(19752, "2024-04-03", 1)
     elif get_input == "send lifts":
         send_lifts(45715)
+    elif get_input == "connection":
+        print(check_connection())
     else:
         print("please enter a valid command")
 
@@ -82,17 +84,33 @@ def get_lift(user_id, date, set_num, lift_name):
         client_socket.send(message.encode())
         data = client_socket.recv(1024).decode()
         data_from_server = tuple_to_string(data)
-
-        #print("received from server : " + data)
         message = "bye"
 
     client_socket.close()
-    #lift_as_dict = format_output_string(FormatType.GETLIFT, data_from_server)
-    #print(lift_as_dict)
     return data_from_server
 
-def test_get():
-    return "got this from client"
+def check_connection():
+    host = "127.0.0.1"
+    port = 5000
+
+    client_socket = socket.socket()
+    client_socket.settimeout(5)
+
+    data_from_server = "no connection"
+    try:
+        client_socket.connect((host, port))
+        message = "CheckConnection"
+        
+        while message.lower().strip() != "bye":
+            client_socket.send(message.encode())
+            data = client_socket.recv(1024).decode()
+            data_from_server = data
+            message = "bye"
+
+        client_socket.close()
+    except socket.error as exc:
+        data_from_server = "error connecting to server : %s" % exc
+    return data_from_server
 
 if __name__ == "__main__":
     client_program()

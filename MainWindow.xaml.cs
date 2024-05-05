@@ -69,6 +69,20 @@ namespace LiftTracker
             }
 
             WorkoutTemplatesCBox.SelectedIndex = 0;
+
+            Runtime.PythonDLL = @"C:\Python310\python312.dll";
+            PythonEngine.Initialize();
+            string temp = "";
+            using (Py.GIL())
+            {
+                var getLiftScript = Py.Import("ClientMain");
+                var script_result = getLiftScript.InvokeMethod("check_connection");
+                temp = script_result.ToString();
+            }
+            PythonEngine.Shutdown();
+            if (temp == "valid connection") { TestLabel.Content = "Server Connection Established"; }
+            else { TestLabel.Content = "Could not connect to server"; }
+
         }
 
         private void AddLiftBtn_Click(object sender, RoutedEventArgs e)

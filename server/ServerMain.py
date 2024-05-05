@@ -50,6 +50,8 @@ def server_program():
                 json_str = json_str[1:-2]
                 json_dict = json.loads(json_str)
                 receive_lifts(parsed_data[1], json_dict)
+            case "CheckConnection":
+                data = "valid connection"
             case _:
                 print('something failed')
         conn.send(data.encode())
