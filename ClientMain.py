@@ -56,38 +56,45 @@ def send_lifts(user_id, c_json_data):
     port = 5000
 
     client_socket = socket.socket()
-    client_socket.connect((host, port))
+    client_socket.settimeout(5)
+    
+    try:
+        client_socket.connect((host, port))
 
-    message = "SentLifts" + "||" + str(user_id) + "||" + str(json_bytes)
+        message = "SentLifts" + "||" + str(user_id) + "||" + str(json_bytes)
 
-    while message != "bye":
-        client_socket.send(message.encode())
-        data = client_socket.recv(1024).decode()
+        while message != "bye":
+            client_socket.send(message.encode())
+            data = client_socket.recv(1024).decode()
 
-        #print("received from server : " + data)
+            message = "bye"
 
-        message = "bye"
-
-    client_socket.close()
+        client_socket.close()
+    except socket.error as exc:
+        return "failed to save workout" + "||" + str(exc)
 
 def get_lift(user_id, date, set_num, lift_name):
     host = "127.0.0.1"
     port = 5000
 
     client_socket = socket.socket()
-    client_socket.connect((host, port))
+    client_socket.settimeout(5)
+    try:
+        client_socket.connect((host, port))
 
-    message = "GetLifts" + "||" + str(user_id) + "||" + date + "||" + str(set_num) + "||" + str(lift_name)
-    data_from_server = ""
+        message = "GetLifts" + "||" + str(user_id) + "||" + date + "||" + str(set_num) + "||" + str(lift_name)
+        data_from_server = ""
 
-    while message.lower().strip() != "bye":
-        client_socket.send(message.encode())
-        data = client_socket.recv(1024).decode()
-        data_from_server = tuple_to_string(data)
-        message = "bye"
+        while message.lower().strip() != "bye":
+            client_socket.send(message.encode())
+            data = client_socket.recv(1024).decode()
+            data_from_server = tuple_to_string(data)
+            message = "bye"
 
-    client_socket.close()
-    return data_from_server
+        client_socket.close()
+        return data_from_server
+    except socket.error as exc:
+        return "failed to retrieve lift" + "||" + str(exc)
 
 def check_connection():
     host = "127.0.0.1"
@@ -96,11 +103,10 @@ def check_connection():
     client_socket = socket.socket()
     client_socket.settimeout(5)
 
-    data_from_server = "no connection"
     try:
         client_socket.connect((host, port))
         message = "CheckConnection"
-        
+        data = ''
         while message.lower().strip() != "bye":
             client_socket.send(message.encode())
             data = client_socket.recv(1024).decode()
@@ -108,9 +114,9 @@ def check_connection():
             message = "bye"
 
         client_socket.close()
+        return data
     except socket.error as exc:
-        data_from_server = "error connecting to server : %s" % exc
-    return data_from_server
+        return exc
 
 if __name__ == "__main__":
     client_program()
