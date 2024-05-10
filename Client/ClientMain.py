@@ -105,7 +105,7 @@ def get_workout(user_id, date, workout_name):
     try:
         client_socket.connect((host, port))
 
-        message = "GetWorkout" + "||" + str(user_id) + "||" + date + "||" + workout_name
+        message = "get_workout" + "||" + str(user_id) + "||" + date + "||" + workout_name
         data_from_server = ""
 
         while message.lower().strip() != "bye":

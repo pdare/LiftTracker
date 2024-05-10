@@ -23,8 +23,9 @@
                 <Button x:Name="UseTemplateBtn" Grid.Column="0" Background="#a3c68c" Width="80" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="UseTemplateBtn_Click" Margin="0,10,0,0">Use Template</Button>
             </StackPanel>
             <Button x:Name="SaveWorkoutBtn" Grid.Column="0" Background="#a3c68c" Margin="0,30,0,0" Click="SaveWorkoutBtn_Click">Save Workout</Button>
-            <Button x:Name="GetWorkoutBtn" Grid.Column="0" Background="#a3c68c" Margin="0,30,0,0" Click="GetWorkoutBtn_Click">Get Workout</Button>
+            <Button x:Name="GetLiftBtn" Grid.Column="0" Background="#a3c68c" Margin="0,30,0,0" Click="GetLiftBtn_Click">Get Lift</Button>
             <Label x:Name="TestLabel" Foreground="#a3c68c" Content="Label"/>
+            <Button x:Name="GetWorkoutBtn" Grid.Column="0" Background="#a3c68c" Margin="0,30,0,0" Click="GetWorkoutBtn_Click">Get Workout</Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="1">
             <Label x:Name="CurrentWorkoutLbl" HorizontalAlignment="Center" FontSize="20" Foreground="#a3c68c">Workout:</Label>

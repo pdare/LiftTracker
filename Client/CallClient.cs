@@ -60,5 +60,20 @@ namespace LiftTracker.Client
             PythonEngine.Shutdown();
             return temp;
         }
+
+        public string GetWorkout(int user_id, string date, string workout_name)
+        {
+            Runtime.PythonDLL = @"C:\Python310\python312.dll";
+            PythonEngine.Initialize();
+            string temp;
+            using (Py.GIL())
+            {
+                var getLiftScript = Py.Import("Client.ClientMain");
+                var script_result = getLiftScript.InvokeMethod("get_workout", new PyObject[] { user_id.ToPython(), date.ToPython(), workout_name.ToPython() });
+                temp = script_result.ToString();
+            }
+            PythonEngine.Shutdown();
+            return temp;
+        }
     }
 }

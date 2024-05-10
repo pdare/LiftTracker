@@ -174,10 +174,17 @@ namespace LiftTracker
             else { TestLabel.Content = "failed to save to server"; }
         }
 
-        private void GetWorkoutBtn_Click(object sender, RoutedEventArgs e)
+        private void GetLiftBtn_Click(object sender, RoutedEventArgs e)
         {
             CallClient callClient = new CallClient();
             string temp = callClient.GetLift(19752, "2024-05-04", 1, "Rack Pull");
+            TestLabel.Content = temp;
+        }
+
+        private void GetWorkoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CallClient callClient = new CallClient();
+            string temp = callClient.GetWorkout(19752, "2024-05-10", "borscht");
             TestLabel.Content = temp;
         }
 

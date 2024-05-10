@@ -1,11 +1,16 @@
 import os
 import pymysql
 import json
+from config.definitions import ROOT_DIR
 
 class DatabaseManager:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
+    def __init__(self):
+        file_path = os.path.join(ROOT_DIR, "..\\passwords\\userpass.txt")
+        pass_file = open(file_path, 'r')
+        lines = pass_file.readlines()
+        pass_file.close()
+        self.username = lines[0].strip()
+        self.password = lines[1].strip()
 
     def tuple_to_string(self, tuple):
         output = ""
@@ -32,11 +37,23 @@ class DatabaseManager:
         output = cur.fetchall()
         conn.close()
         output_as_str = self.tuple_to_string(output)
-        print(output)
         return str(output)
 
-    def send_workout():
-        pass
+    def get_workout(self, user_id, date, workout_name):
+        conn = pymysql.connect(
+            host = 'localhost',
+            user = self.username,
+            password = self.password,
+            db = 'LiftTracker',
+        )
+        name = 19752
+        cur = conn.cursor()
+        select_query = "SELECT * FROM workout_lifts WHERE user_id = {0} AND lift_date = '{1}' AND workout_name = '{2}'".format(int(user_id), date, workout_name)
+        cur.execute(select_query)
+        output = cur.fetchall()
+        conn.close()
+        output_as_str = self.tuple_to_string(output)
+        return str(output)
 
     def save_workout(self, json_data, user_id):
         print("printing json input from API")
@@ -44,7 +61,6 @@ class DatabaseManager:
         date = json_dict['date']
         date_split = date.split('-')
         date_sql_format = date_split[2] + '-' + date_split[0] + '-' + date_split[1]
-        print(date_sql_format)
         workout_name = json_dict['workout']
         for key in json_dict:
             if "exercise" in key:
