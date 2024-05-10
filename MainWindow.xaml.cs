@@ -18,6 +18,7 @@ using LiftTracker.View;
 using LiftTracker.Model;
 using System.Text.Json;
 using Python.Runtime;
+using LiftTracker.Client;
 
 namespace LiftTracker
 {
@@ -70,18 +71,8 @@ namespace LiftTracker
 
             WorkoutTemplatesCBox.SelectedIndex = 0;
 
-            Runtime.PythonDLL = @"C:\Python310\python312.dll";
-            PythonEngine.Initialize();
-            string temp = "";
-            using (Py.GIL())
-            {
-                var getLiftScript = Py.Import("ClientMain");
-                var script_result = getLiftScript.InvokeMethod("check_connection");
-                temp = script_result.ToString();
-            }
-            PythonEngine.Shutdown();
-            if (temp == "valid connection") { TestLabel.Content = "Server Connection Established"; }
-            else { TestLabel.Content = "Could not connect to server"; }
+            CallClient callClient = new CallClient();
+            TestLabel.Content = callClient.CheckConnection();
 
         }
 
@@ -105,7 +96,6 @@ namespace LiftTracker
 
             liftBlocks.Add(block);
             ucPanel.Children.Add(block);
-            //block.UpdateSetLbl();
         }
 
         private void UseTemplateBtn_Click(object sender, RoutedEventArgs e)
@@ -178,35 +168,16 @@ namespace LiftTracker
             string filename = String.Format("Workout {0}", DateTime.Now.ToString("HH mm MM-dd-yyyy"));
             File.WriteAllText(filename, data);
 
-            Runtime.PythonDLL = @"C:\Python310\python312.dll";
-            PythonEngine.Initialize();
-            string data_to_send = "data from C#";
-            int user_id = 19752;
-            using (Py.GIL())
-            {
-                var getLiftScript = Py.Import("ClientMain");
-                var script_result = getLiftScript.InvokeMethod("send_lifts", new PyObject[] { user_id.ToPython(), data_for_server.ToPython() });
-            }
-            PythonEngine.Shutdown();
-
+            CallClient callClient = new CallClient();
+            bool save_to_server = callClient.SaveWorkout(19752, data_for_server);
+            if (save_to_server) { TestLabel.Content = "workout saved to server"; }
+            else { TestLabel.Content = "failed to save to server"; }
         }
 
         private void GetWorkoutBtn_Click(object sender, RoutedEventArgs e)
         {
-            Runtime.PythonDLL = @"C:\Python310\python312.dll";
-            PythonEngine.Initialize();
-            int user_id = 19752;
-            string date = "2024-05-04";
-            int set_num = 1;
-            string lift_name = "Rack Pull";
-            string temp = "";
-            using (Py.GIL())
-            {
-                var getLiftScript = Py.Import("ClientMain");
-                var script_result = getLiftScript.InvokeMethod("get_lift", new PyObject[] {user_id.ToPython(), date.ToPython(), set_num.ToPython(), lift_name.ToPython()});
-                temp = script_result.ToString();
-            }
-            PythonEngine.Shutdown();
+            CallClient callClient = new CallClient();
+            string temp = callClient.GetLift(19752, "2024-05-04", 1, "Rack Pull");
             TestLabel.Content = temp;
         }
 
