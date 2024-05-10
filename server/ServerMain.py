@@ -43,15 +43,17 @@ def server_program():
         if not data:
             break
         match parsed_data[0]:
-            case "GetLifts":
+            case "get_lift":
                 data = send_lifts(parsed_data[1], parsed_data[2], parsed_data[3], parsed_data[4])
-            case "SentLifts":
+            case "save_workout":
                 json_str = str(parsed_data[2]).replace('\\', '').replace("b'", '')
                 json_str = json_str[1:-2]
                 json_dict = json.loads(json_str)
                 receive_lifts(parsed_data[1], json_dict)
-            case "CheckConnection":
+            case "check_connection":
                 data = "valid connection"
+            case "GetWorkout":
+                get_workout(parsed_data[1], parsed_data[2])
             case _:
                 print('something failed')
         conn.send(data.encode())
@@ -66,6 +68,14 @@ def send_lifts(user_id, date, set_num, lift_name):
     return db_accessor.get_lift(user_id, date, set_num, lift_name)
 
 def receive_lifts(user_id, json_data):
+    file_path = os.path.join(ROOT_DIR, "..\\passwords\\userpass.txt")
+    pass_file = open(file_path, 'r')
+    lines = pass_file.readlines()
+    pass_file.close()
+    db_accessor = DatabaseManager(lines[0].strip(), lines[1].strip())
+    db_accessor.save_workout(json_data, user_id)
+
+def get_workout(user_id, date, workout_name):
     file_path = os.path.join(ROOT_DIR, "..\\passwords\\userpass.txt")
     pass_file = open(file_path, 'r')
     lines = pass_file.readlines()

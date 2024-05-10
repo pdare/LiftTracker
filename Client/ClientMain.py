@@ -49,7 +49,7 @@ def format_output_string(format_type, output_str):
             result.update({"user_id": split_params[5]})
     return result
 
-def send_lifts(user_id, c_json_data):
+def save_workout(user_id, c_json_data):
     json_bytes = json.dumps(c_json_data).encode('utf-8')
 
     host = "127.0.0.1"
@@ -61,7 +61,7 @@ def send_lifts(user_id, c_json_data):
     try:
         client_socket.connect((host, port))
 
-        message = "SentLifts" + "||" + str(user_id) + "||" + str(json_bytes)
+        message = "save_workout" + "||" + str(user_id) + "||" + str(json_bytes)
 
         while message != "bye":
             client_socket.send(message.encode())
@@ -82,7 +82,7 @@ def get_lift(user_id, date, set_num, lift_name):
     try:
         client_socket.connect((host, port))
 
-        message = "GetLifts" + "||" + str(user_id) + "||" + date + "||" + str(set_num) + "||" + str(lift_name)
+        message = "get_lift" + "||" + str(user_id) + "||" + date + "||" + str(set_num) + "||" + str(lift_name)
         data_from_server = ""
 
         while message.lower().strip() != "bye":
@@ -96,6 +96,29 @@ def get_lift(user_id, date, set_num, lift_name):
     except socket.error as exc:
         return "failed to retrieve lift" + "||" + str(exc)
 
+def get_workout(user_id, date, workout_name):
+    host = "127.0.0.1"
+    port = 5000
+
+    client_socket = socket.socket()
+    client_socket.settimeout(5)
+    try:
+        client_socket.connect((host, port))
+
+        message = "GetWorkout" + "||" + str(user_id) + "||" + date + "||" + workout_name
+        data_from_server = ""
+
+        while message.lower().strip() != "bye":
+            client_socket.send(message.encode())
+            data = client_socket.recv(1024).decode()
+            data_from_server = tuple_to_string(data)
+            message = "bye"
+
+        client_socket.close()
+        return data_from_server
+    except socket.error as exc:
+        return "failed to retrieve workout" + "||" + str(exc)
+
 def check_connection():
     host = "127.0.0.1"
     port = 5000
@@ -105,7 +128,7 @@ def check_connection():
 
     try:
         client_socket.connect((host, port))
-        message = "CheckConnection"
+        message = "check_connection"
         data = ''
         while message.lower().strip() != "bye":
             client_socket.send(message.encode())

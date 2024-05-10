@@ -37,7 +37,7 @@ namespace LiftTracker.Client
             using (Py.GIL())
             {
                 var getLiftScript = Py.Import("Client.ClientMain");
-                var script_result = getLiftScript.InvokeMethod("send_lifts", new PyObject[] { user_id.ToPython(), data_for_server.ToPython() });
+                var script_result = getLiftScript.InvokeMethod("save_workout", new PyObject[] { user_id.ToPython(), data_for_server.ToPython() });
                 client_response = script_result.ToString();
             }
             PythonEngine.Shutdown();
